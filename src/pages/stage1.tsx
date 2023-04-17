@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import { UserSelector } from '@/molecules/UserSelector';
 import { Stage } from '@/molecules/Stage';
 import { GestureRecognizer } from '@/layers/GestureRecognizer';
-import { Grid, useStageManager } from '@/context/StageManager';
+import { useStageManager } from '@/context/StageManager';
 import { useServer } from '@/context/ServerManager';
 import { Point, User, useSessionManager } from '@/context/SessionManager';
 import { createDot, debounce } from '@/utils';
-import { instrumentFor } from '@/instruments';
+import { instrumentFor } from '@/instruments/instruments';
 
 export default function Stage1() {
   const divRef = useRef<HTMLDivElement>(null);
@@ -43,8 +43,8 @@ export default function Stage1() {
     const quantizePointAndDisplay = debounce((user: User, point: Point) => {
       const { instrument, noteBed } = instrumentFor(user.id);
 
-      if (instrument) {
-        const note = noteBed.getNote(point);
+      if (instrument()) {
+        const note = noteBed().getNote(point);
 
         console.log('Playing', note);
         // instrument.triggerAttackRelease(note, '8n');

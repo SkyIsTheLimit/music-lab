@@ -40,7 +40,7 @@ export function UserSelector({ session }: { session: Session }) {
         <div role='status'>
           <svg
             aria-hidden='true'
-            className='w-8 h-8 mr-2 text-gray-700 animate-spin fill-green-500'
+            className='w-8 h-8 mr-2 text-gray-900 animate-spin fill-green-500'
             viewBox='0 0 100 101'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -54,7 +54,7 @@ export function UserSelector({ session }: { session: Session }) {
               fill='currentFill'
             />
           </svg>
-          <span className='sr-only'>Loading...</span>
+          <span className='sr-only text-neutral-400'>Loading...</span>
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useStageManager } from '@/context/StageManager';
 import { Point } from '@/context/SessionManager';
+import { debounce } from '@/utils';
 
 export interface GestureRecognizerProps {
   onNewPoints: (points: Point[]) => void;
@@ -33,9 +34,15 @@ export function GestureRecognizer({ onNewPoints }: GestureRecognizerProps) {
       }
     }
 
+    const handleMove = debounce((e: TouchEvent) => {
+      if (onNewPoints && power) {
+        onNewPoints(getPoints(e));
+      }
+    }, 300);
+
     if (plane) {
       plane.addEventListener('touchstart', handleTouch);
-      plane.addEventListener('touchmove', handleTouch);
+      plane.addEventListener('touchmove', handleMove);
       plane.addEventListener('touchend', handleTouch);
       plane.addEventListener('touchcancel', handleTouch);
     }
@@ -43,7 +50,7 @@ export function GestureRecognizer({ onNewPoints }: GestureRecognizerProps) {
     return () => {
       if (plane) {
         plane.removeEventListener('touchstart', handleTouch);
-        plane.removeEventListener('touchmove', handleTouch);
+        plane.removeEventListener('touchmove', handleMove);
         plane.removeEventListener('touchend', handleTouch);
         plane.removeEventListener('touchcancel', handleTouch);
       }

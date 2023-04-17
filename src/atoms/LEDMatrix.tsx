@@ -83,6 +83,12 @@ export function LEDMatrix({
                 width: `${ledSize}px`,
                 height: `${ledSize}px`,
                 opacity: brights[index % columns] || 0,
+                backgroundColor: power
+                  ? (colors &&
+                      colors.length &&
+                      colors[index % colors.length]) ||
+                    '#4ade80'
+                  : '#262626',
               }}
             />
           </div>

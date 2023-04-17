@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/api/stage1.js"
+    "src/pages/api/stage1.js",
+    "src/instruments/tonejs-instruments-master/Tonejs-Instruments.js"
   ],
   "exclude": ["node_modules"]
 }
